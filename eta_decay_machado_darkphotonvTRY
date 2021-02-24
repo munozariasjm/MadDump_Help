@@ -1,0 +1,28 @@
+./mg5_aMC --mode=maddump eta_decay_machado_darkphotonvTRY
+
+import model Darkphoton --modelname
+define  e- = e1
+define  e+ = e1bar
+# multiparticle definition to exclude this particles in the e-dm scattering interation
+define mmm = a h1 h2 z
+import_events decay\ Fluxes/Eta_Flux.hepmc
+decay etam >  a chi chic
+define darkmatter chi
+add process interaction @electron /mmm 
+output preliminary_results_Eta
+launch
+
+# output from spheno is required for parameters update
+SPheno.spc.Darkphoton_f
+#set flux_norm 1.1e21
+#set prod_xsec_in_norm false
+#set d_target_detector 57400.0
+#set detector_density 1.3954
+#set Z_average 18
+#set A_average 40
+#set parallelepiped True
+#set x_side 400.0
+#set y_side 300.0
+#set depth 500.0
+#set ncores 16
+#set testplot False
